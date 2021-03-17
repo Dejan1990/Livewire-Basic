@@ -1,7 +1,12 @@
 <div>
-    <input wire:model="name" type="text"> <!-- U pozadini se odvija AJAX request -->
+    @foreach ($contacts as $contact)
+        <div>
+            @livewire('say-hi', ['contact' => $contact], key($contact->name))
+            <button wire:click="removeContact('{{ $contact->name }}')">Remove</button>
+        </div>
+    @endforeach
 
-    Hello {{ $name }} 
+    <hr>
 
-    <h2>{{ $hydrate }}</h2>
+    {{ now() }}
 </div>

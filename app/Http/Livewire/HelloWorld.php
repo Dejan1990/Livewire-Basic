@@ -2,26 +2,23 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
 class HelloWorld extends Component
 {
-    public $name = 'Jelly', $hydrate;
+    public $contacts;
 
-    public function mount($name) // Lifecycle Hooks
+    public function mount()
     {
-        $this->name = $name; // ovaj metod se odvija sa prvim request-om, it's gonna be the first thing that happens when this component is boot up
+        $this->contacts = Contact::all();
     }
 
-    public function hydrate() // Lifecycle Hooks -> is gonna run at the begining of every subsequent request that'll livewire component makes
+    public function removeContact($name)
     {
-        $this->hydrate = 'I am from Hydrate';
-    }
-
-    public function updatedName() // Lifecycle Hooks -> is gonna run any time you update a public property
-    {
-        $this->name = strtoupper($this->name);
+        Contact::whereName($name)->first()->delete();
+        $this->contacts = Contact::all();
     }
 
     public function render()
