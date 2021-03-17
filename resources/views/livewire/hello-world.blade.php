@@ -8,4 +8,8 @@
     </select>
 
     {{ implode(', ',$greeting) }} {{ $name }} @if ($loud) ! @endif
+
+    <form action="#" wire:submit.prevent="$set('name', 'Bingo')">
+        <button>Reset Name</button> <!-- wire: -> Ovde mozemo ubaciti bilo koji event -->
+    </form>
 </div>
