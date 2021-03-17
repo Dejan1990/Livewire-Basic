@@ -10,14 +10,10 @@ class HelloWorld extends Component
 {
     public $contacts;
 
+    protected $listeners = ['foo' => '$refresh'];
+
     public function mount()
     {
-        $this->contacts = Contact::all();
-    }
-
-    public function removeContact($name)
-    {
-        Contact::whereName($name)->first()->delete();
         $this->contacts = Contact::all();
     }
 
